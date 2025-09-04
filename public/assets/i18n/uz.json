@@ -1,0 +1,16 @@
+{
+  "title": "Toshkentning futbol stadionlari",
+  "allDistricts": "Barcha tumanlar",
+  "fields": "maydonlar",
+  "field": "maydon",
+  "totalStadiums": "Jami stadionlar:",
+  "totalFields": "Jami maydonlar:",
+  "district": "Tuman:",
+  "fieldCount": "Maydonlar soni:",
+  "coordinates": "Koordinatalar:",
+  "districts": {
+    "Мирабадский": "Mirobod",
+    "Бектемир": "Bektemir",
+    "Яшнабад": "Yashnobod"
+  }
+}
