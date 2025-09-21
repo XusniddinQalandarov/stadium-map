@@ -9,5 +9,8 @@ export interface Stadium {
 export enum District {
   MIRABADSKY = 'Мирабадский',
   BEKTEMIR = 'Бектемир',
-  YASHNABAD = 'Яшнабад'
+  YASHNABAD = 'Яшнабад',
+  CHILANZAR = 'Чмланзар',
+  OLMAZOR = 'Олмазор',
+  SHAYKHANTAKHUR = 'Шайхантахур'
 }
