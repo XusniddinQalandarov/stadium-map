@@ -10,7 +10,7 @@ export enum District {
   MIRABADSKY = 'Мирабадский',
   BEKTEMIR = 'Бектемир',
   YASHNABAD = 'Яшнабад',
-  CHILANZAR = 'Чмланзар',
+  CHILANZAR = 'Чиланзар',
   OLMAZOR = 'Олмазор',
   SHAYKHANTAKHUR = 'Шайхантахур'
 }
