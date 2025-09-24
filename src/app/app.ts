@@ -1,8 +1,10 @@
 import { Component, OnInit, AfterViewInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { Stadium, District } from './models/stadium.interface';
 import { StadiumService } from './services/stadium.service';
-import { environment } from '../environments/environment';
+import { AuthService } from './services/auth.service';
+import { appConfig } from './config/app.config';
 
 declare var ymaps: any;
 
@@ -28,6 +30,8 @@ interface StadiumPlacemark {
 })
 export class AppComponent implements OnInit, AfterViewInit {
   private stadiumService = inject(StadiumService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   mapCenter: [number, number] = [41.2866, 69.3107];
   map: any;
@@ -66,7 +70,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     const script = document.createElement('script');
-    script.src = `https://api-maps.yandex.ru/2.1/?apikey=${environment.yandexMapsApiKey}&lang=ru_RU`;
+    script.src = `https://api-maps.yandex.ru/2.1/?apikey=${appConfig.yandexMapsApiKey}&lang=ru_RU`;
     script.onload = () => {
       this.initMap();
     };
@@ -179,5 +183,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
       this.addPlacemarksToMap();
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

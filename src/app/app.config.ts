@@ -4,6 +4,8 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 import { provideHttpClient } from '@angular/common/http';
 
 import { routes } from './app.routes';
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -11,6 +13,8 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideNoopAnimations(),
-    provideHttpClient()
+    provideHttpClient(),
+    AuthService,
+    AuthGuard
   ]
 };
