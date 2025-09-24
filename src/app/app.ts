@@ -5,6 +5,7 @@ import { Stadium, District } from './models/stadium.interface';
 import { StadiumService } from './services/stadium.service';
 import { AuthService } from './services/auth.service';
 import { appConfig } from './config/app.config';
+import { appConfigLocal } from './config/app.config.local';
 
 declare var ymaps: any;
 
@@ -70,7 +71,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     }
 
     const script = document.createElement('script');
-    script.src = `https://api-maps.yandex.ru/2.1/?apikey=${appConfig.yandexMapsApiKey}&lang=ru_RU`;
+    const config = appConfigLocal.yandexMapsApiKey ? appConfigLocal : appConfig;
+    script.src = `https://api-maps.yandex.ru/2.1/?apikey=${config.yandexMapsApiKey}&lang=ru_RU`;
     script.onload = () => {
       this.initMap();
     };

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { appConfig } from '../config/app.config';
+import { appConfigLocal } from '../config/app.config.local';
 
 export interface LoginCredentials {
   username: string;
@@ -59,8 +60,9 @@ export class AuthService {
   login(credentials: LoginCredentials): boolean {
     const { username, password } = credentials;
 
-    // Check against app config credentials
-    if (username === appConfig.authUsername && password === appConfig.authPassword) {
+    // Check against app config credentials (use local config for development)
+    const config = appConfigLocal.authUsername ? appConfigLocal : appConfig;
+    if (username === config.authUsername && password === config.authPassword) {
       const token = this.generateToken();
       const expiry = Date.now() + this.TOKEN_DURATION;
 

@@ -20,6 +20,9 @@ yarn-error.log
 .env.staging
 .env.*.local
 
+# Local configuration files with credentials
+src/app/config/app.config.local.ts
+
 # IDEs and editors
 .idea/
 .project
