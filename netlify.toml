@@ -1,5 +1,9 @@
 [build]
-  command = "npm run build"
+  # Run a small script to generate `src/app/config/app.config.local.ts` from
+  # Netlify environment variables (so secrets are not committed). The script
+  # is safe to run even when env vars are empty — it will create a file with
+  # empty placeholders which satisfies the TypeScript import during build.
+  command = "sh ./netlify-generate-config.sh && npm run build"
   publish = "dist/stadium-map/browser"
 
 [[redirects]]
