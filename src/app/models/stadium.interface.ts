@@ -4,6 +4,8 @@ export interface Stadium {
   address: string;
   landmark?: string;
   fieldCount: number;
+  // Optional array of image URLs (served from /assets/...)
+  images?: string[];
 }
 
 export enum District {
