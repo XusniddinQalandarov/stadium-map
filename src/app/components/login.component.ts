@@ -405,20 +405,23 @@ export class LoginComponent {
     this.showPassword = !this.showPassword;
   }
 
-  onLogin() {
+  async onLogin() {
     this.isLoading = true;
     this.errorMessage = '';
 
-    // Simulate a small delay for better UX
-    setTimeout(() => {
-      const success = this.authService.login(this.credentials);
-
+    // Call serverless auth endpoint
+    try {
+      const success = await this.authService.login(this.credentials);
       if (success) {
         this.router.navigate(['/map']);
       } else {
         this.errorMessage = 'Неверное имя пользователя или пароль';
-        this.isLoading = false;
       }
-    }, 500);
+    } catch (err) {
+      this.errorMessage = 'Сбой при входе. Повторите попытку.';
+      console.error(err);
+    } finally {
+      this.isLoading = false;
+    }
   }
 }

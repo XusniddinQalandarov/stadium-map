@@ -57,12 +57,17 @@ export class AuthService {
   /**
    * Authenticate user with credentials
    */
-  login(credentials: LoginCredentials): boolean {
-    const { username, password } = credentials;
+  async login(credentials: LoginCredentials): Promise<boolean> {
+    try {
+      const res = await fetch('/.netlify/functions/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials)
+      });
 
-    // Check against app config credentials (use local config for development)
-    const config = appConfigLocal.authUsername ? appConfigLocal : appConfig;
-    if (username === config.authUsername && password === config.authPassword) {
+      if (!res.ok) return false;
+
+      // On success, generate a client-side token as before
       const token = this.generateToken();
       const expiry = Date.now() + this.TOKEN_DURATION;
 
@@ -71,9 +76,10 @@ export class AuthService {
 
       this.isAuthenticatedSubject.next(true);
       return true;
+    } catch (err) {
+      console.error('Auth request failed', err);
+      return false;
     }
-
-    return false;
   }
 
   /**
